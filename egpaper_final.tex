@@ -71,10 +71,25 @@ In the next sections, I will introduce the variants of NeRF that is able to leve
 
 \section{Related Works}
 
-To tackle the tricky problem, many perspectives have been proposed.
+To tackle the tricky problem, many methods have been proposed.
+In Figure \ref{fig:taxonomy}, these methods are grouped into different perspectives that these methods are based on.
 For each perspective, a few works will be mentioned and their contributions will be explained.
 
+\begin{figure}[h]
+   \begin{center}
+      \includegraphics[width=80mm]{assets/taxonomy.png}
+   \end{center}
+   \caption{Taxonomy of NeRF for Sparse Views}
+   \label{fig:taxonomy}
+\end{figure}
+
 \subsection{Using Depth to Guide the Reconstruction}
+
+It is very common to use depth information to guide the 3D reconstruction, since the coarse 3D information can be easily obtained from SfM.
+In DS-NeRF~\cite{kangle2021dsnerf}, they use SfM to produce sparse 3D points that can be used as “free” depth supervision during training
+and add a loss to encourage the distribution of a ray’s terminating depth matches a given 3D keypoint, incorporating depth uncertainty.
+
+While in DDP-NeRF~\cite{Roessle_2022_CVPR}, 
 
 \subsection{Leveraging Correspondences between 2D and 3D}
 
