@@ -67,12 +67,12 @@ School of EECS, Peking University\\
 Neural radiance fields (NeRF)~\cite{mildenhall2020nerf} encode a scene into a neural representation that enables photo-realistic rendering of novel views. However, a successful reconstruction from RGB images requires a large number of input views taken under static conditions — typically up to a few hundred images for room-size scenes.
 Moreover, the speed of NeRF is disastrously slow because of the hundreds of views it needs to process.
 As a result, how to use NeRF for 3D reconstruction leveraging very few images is quite important.
-In the next sections, I will introduce the variants of NeRF that is able to leverage sparse views — even single view to reconstruct 3D scenes.
+In this survey, I will introduce the variants of NeRF which are able to leverage sparse views — even single view to reconstruct 3D scenes.
 
 \section{Related Works}
 
 To tackle the tricky problem, many methods have been proposed.
-In Figure \ref{fig:taxonomy}, these methods are grouped into different perspectives that these methods are based on.
+In Figure \ref{fig:taxonomy}, selected methods are grouped into different perspectives that these methods are based on.
 For each perspective, a few works will be mentioned and their contributions will be explained.
 
 \begin{figure}[h]
@@ -83,17 +83,29 @@ For each perspective, a few works will be mentioned and their contributions will
    \label{fig:taxonomy}
 \end{figure}
 
-\subsection{Using Depth to Guide the Reconstruction}
+\subsection{Using Depth to Guide Reconstruction}
 
-It is very common to use depth information to guide the 3D reconstruction, since the coarse 3D information can be easily obtained from SfM.
-In DS-NeRF~\cite{kangle2021dsnerf}, they use SfM to produce sparse 3D points that can be used as “free” depth supervision during training
+It is very common to use depth information to guide 3D reconstruction, since in multi-view stereo, coarse 3D information can be easily obtained by Structure from Motion (SfM).
+
+In DS-NeRF~\cite{kangle2021dsnerf}, researchers use SfM to produce sparse 3D points that can be used as “free” depth supervision during training
 and add a loss to encourage the distribution of a ray’s terminating depth matches a given 3D keypoint, incorporating depth uncertainty.
 
-While in DDP-NeRF~\cite{Roessle_2022_CVPR}, 
+While in DDP-NeRF~\cite{Roessle_2022_CVPR}, researchers first utilize the sparse point cloud reconstructions from SfM preprocessing, which to feed into a depth completion network. They then impose these depth estimates as constraints to the NeRF optimization according to the estimated uncertainty.
+
+Both of the two works facilitate novel view synthesis results at significantly higher image quality and lower depth error compared to NeRF, and more importantly, they both use depth information to help constraint NeRF and achieve sparse-view reconstruction.
 
 \subsection{Leveraging Correspondences between 2D and 3D}
 
+Since we know NeRF is the neural bridge between 2D and 3D, then it is natural to use the correspondences between 2D and 3D to help the reconstruction.
+
+In SRF~\cite{SRF}, researchers predict color and density for each 3D point given an encoding of its stereo correspondence in the input images. The encoding is implicitly learned by an ensemble of pair-wise similarities — emulating classical stereo. Experiments show that SRF learns structure instead of over-ﬁtting on a scene.
+
+And in~\cite{yu2020pixelnerf}, researchers proposed pixelNeRF, a learning framework that enables predicting NeRFs from one or several images in a feed-forward manner. Unlike the original NeRF network, which does not make use of any image features, pixelNeRF takes spatial image features aligned to each pixel as an input. This image conditioning allows the framework to be trained on a set of multi-view images, where it can learn scene priors to perform view synthesis from one or few input views.
+
 \subsection{Learning from Psuedo Labels}
+
+The core idea of learning scene representation from sparse input is the idea of semi-supervised learning, where psuedo labels play an important role. 
+Therefore, learning from psuedo labels is also an interesting perspective to look at.
 
 \subsection{Others}
 
