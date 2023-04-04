@@ -6,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
 
 % Include other packages here, before hyperref.
 
@@ -47,12 +49,12 @@ School of EECS, Peking University\\
 %\thispagestyle{empty}
 
 %%%%%%%%% ABSTRACT
-\begin{abstract}
-   In this paper, I systematically survey the NeRF model for sparse views.
-   I first analyze the shortcomings and difficulties of the original NeRF model,
-   then I introduce the variants of NeRF for sparse views, analyze their inner relations and compare their abilities.
-   Finally, I point out my personal opinions on the future development of NeRF for sparse views.
-\end{abstract}
+% \begin{abstract}
+%    In this paper, I systematically survey the NeRF model for sparse views.
+%    I first analyze the shortcomings and difficulties of the original NeRF model,
+%    then I introduce the variants of NeRF for sparse views, analyze their inner relations and compare their abilities.
+%    Finally, I point out my personal opinions on the future development of NeRF for sparse views.
+% \end{abstract}
 
 %%%%%%%%% BODY TEXT
 % introduction
@@ -67,22 +69,22 @@ Moreover, the speed of NeRF is disastrously slow because of the hundreds of view
 As a result, how to use NeRF for 3D reconstruction leveraging very few images is quite important.
 In the next sections, I will introduce the variants of NeRF that is able to leverage sparse views — even single view to reconstruct 3D scenes.
 
-\section{Related works}
+\section{Related Works}
 
-In this section, I will list some perspectives to tackle the tricky problem. 
+To tackle the tricky problem, many perspectives have been proposed.
 For each perspective, a few works will be mentioned and their contributions will be explained.
 
-\subsection{Using depth to guide the reconstruction}
+\subsection{Using Depth to Guide the Reconstruction}
 
-\subsection{Leveraging correspondences between 2D and 3D}
+\subsection{Leveraging Correspondences between 2D and 3D}
 
-\subsection{Learning from psuedo labels}
+\subsection{Learning from Psuedo Labels}
 
 \subsection{Others}
 
-\section{Relationship between NeRF variants}
+\section{Relationship between NeRF Variants}
 
-\section{Future development}
+\section{Future Development}
 
 \newpage
 {\small
