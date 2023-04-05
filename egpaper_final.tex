@@ -145,29 +145,29 @@ In Table \ref{tab:relation}, the relationship and comparison of NeRF variants ar
      \hline
      Method && Taxonomy && Single View && PSNR$\uparrow$\\
      \hline
-     NeRF~\cite{mildenhall2020nerf} && / && $\times$ && 11\\
-     DS-NeRF~\cite{kangle2021dsnerf} && DG && $\times$ && \\
-     DDP-NeRF~\cite{Roessle_2022_CVPR} && DG && $\times$ && \\
-     SRF~\cite{SRF} && CG && $\times$ &&\\
-     pixelNeRF~\cite{yu2020pixelnerf} && CG && $\checkmark$ &&\\
-     MVSNeRF~\cite{mvsnerf} && CG && $\times$ &&\\
-     VisionNeRF~\cite{lin2023visionnerf} && NR && $\checkmark$ &&\\
-     NeRS~\cite{zhang2021ners} && NR && $\times$ &&\\
-     AutoRF~\cite{mueller2022autorf} && NR && $\checkmark$ &&\\
-     SinNeRF~\cite{Xu_2022_SinNeRF} && O && $\checkmark$ &&\\
-     DietNeRF~\cite{Jain_2021_ICCV} && O && $\times$ &&\\
-     RegNeRF~\cite{Niemeyer2021Regnerf} && O && $\times$ &&\\
+     NeRF~\cite{mildenhall2020nerf} && / && $\times$ && 8 (Dense)\\
+     DS-NeRF~\cite{kangle2021dsnerf} && DG && $\times$ && 12.17\\
+     DDP-NeRF~\cite{Roessle_2022_CVPR} && DG && $\times$ && / \\
+     SRF~\cite{SRF} && CG && $\times$ && 15.68 \\
+     pixelNeRF~\cite{yu2020pixelnerf} && CG && $\checkmark$ && 18.95\\
+     MVSNeRF~\cite{mvsnerf} && CG && $\times$ && 18.54\\
+     VisionNeRF~\cite{lin2023visionnerf} && NR && $\checkmark$ && / \\
+     NeRS~\cite{zhang2021ners} && NR && $\times$ && / \\
+     AutoRF~\cite{mueller2022autorf} && NR && $\checkmark$ && / \\
+     SinNeRF~\cite{Xu_2022_SinNeRF} && O && $\checkmark$ && 16.52\\
+     DietNeRF~\cite{Jain_2021_ICCV} && O && $\times$ && 11.85\\
+     RegNeRF~\cite{Niemeyer2021Regnerf} && O && $\times$ && 18.89\\
      \hline
    \end{tabular}
    \vspace{2mm}
-   \caption{Comparison of NeRF Variants. DG refers to depth guided, CC refers to correspondence guided, NR refers to novel representation, O refers to others, PSNR is tested on DTU dataset~\cite{6909453}.}
+   \caption{Comparison of NeRF Variants. DG, CG, NR, O refer to depth-guided, correspondence-guided, novel representation, others respectively. PSNR is tested on DTU dataset~\cite{6909453} in 3 views.}
    \label{tab:relation}
    \vspace{-2mm}
 \end{table}
 
 \section{Future Development}
 
-As we can see from the above, NeRF variants are still in the early stage of development. There are still many problems to be solved, such as how to inject language annotations to them, how to make the training process as fast as possible, and so on. Maybe in the future, we can see more and more NeRF variants that can be used in real life.
+As we can see from the above, NeRF variants are still in the early stage of development. There are still many problems to be solved, such as how to append more annotations to them, how to make the training process as fast as possible, etc. Maybe in the future, we can see more and more NeRF variants that can be used in real life.
 
 \newpage
 {\small
