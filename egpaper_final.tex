@@ -8,6 +8,7 @@
 \usepackage{amssymb}
 \usepackage{tikz}
 \usepackage{tikz-qtree}
+\usepackage{amssymb}
 
 % Include other packages here, before hyperref.
 
@@ -98,7 +99,7 @@ Both of the two works facilitate novel view synthesis results at significantly h
 
 Since we know NeRF is the neural bridge between 2D and 3D, then it is natural to use the correspondences between 2D and 3D to help the reconstruction.
 
-In SRF~\cite{SRF}, researchers predict color and density for each 3D point given an encoding of its stereo correspondence in the input images. The encoding is implicitly learned by an ensemble of pair-wise similarities — emulating classical stereo. Experiments show that SRF learns structure instead of over-ﬁtting on a scene.
+In SRF~\cite{SRF}, researchers predict color and density for each 3D point given an encoding of its stereo correspondence in the input images. The encoding is implicitly learned by an ensemble of pair-wise similarities — emulating classical stereo. Experiments show that SRF learns structure instead of over-fitting on a scene.
 
 In~\cite{yu2020pixelnerf}, researchers proposed pixelNeRF, a learning framework that enables predicting NeRFs from one or several images in a feed-forward manner. Unlike the original NeRF network, which does not make use of any image features, pixelNeRF takes spatial image features aligned to each pixel as an input. This image conditioning allows the framework to be trained on a set of multi-view images, where it can learn scene priors to perform view synthesis from one or few input views.
 
@@ -112,7 +113,7 @@ NeRF~\cite{mildenhall2020nerf} proposed a neural representation of 3D scenes, bu
 In VisionNeRF~\cite{lin2023visionnerf}, researchers from UC San Diego and MIT propose to leverage both the global and local features to form an expressive 3D representation. The global features are learned from a vision transformer, while the local features are extracted from a 2D convolutional network. 
 Therefore, this novel 3D representation allows the network to reconstruct unseen regions without enforcing constraints like symmetry or canonical coordinate systems.
 
-While NeRS~\cite{zhang2021ners} learns a neural shape representation of a closed surface that is diffeomorphic to a sphere, guaranteeing water-tight reconstructions. Even more importantly, surface parameterizations allow NeRS to learn (neural) bidirectional surface reﬂectance functions (BRDFs) that factorize view-dependent appearance into environmental illumination, diffuse color (albedo), and specular “shininess.”
+While NeRS~\cite{zhang2021ners} learns a neural shape representation of a closed surface that is diffeomorphic to a sphere, guaranteeing water-tight reconstructions. Even more importantly, surface parameterizations allow NeRS to learn (neural) bidirectional surface reflectance functions (BRDFs) that factorize view-dependent appearance into environmental illumination, diffuse color (albedo), and specular “shininess.”
 
 And in \cite{mueller2022autorf}, AutoRF is proposed to learn a normalized, object-centric representation whose embedding describes and disentangles shape, appearance, and pose. Each encoding provides well-generalizable, compact information about the object of interest, which is decoded in a single-shot into a new target view, thus enabling novel view synthesis.
 
@@ -130,24 +131,43 @@ Finally, in RegNeRF~\cite{Niemeyer2021Regnerf}, researchers observe that the maj
 
 \section{Relationship between NeRF Variants}
 
-\begin{table}
+Although these variants are separated into different classes, they also have inner relations. Most of them are designed to reconstruct 3D scenes, whereas \cite{SRF} and \cite{mueller2022autorf} are specifically designed to reconstruct 3D instances.
+
+Also, some of them (\cite{yu2020pixelnerf}, \cite{lin2023visionnerf}, \cite{mueller2022autorf}, \cite{Xu_2022_SinNeRF}) have the ability to reconstruct 3D scene only from one single view, making it extremely useful in real life and in computational photography in real production.
+
+From above, we can see that the tricky issue mainly lies in how to effectively supervise the reconstruction since views are sparse. In the works above, depth, correspondence, psuedo labels are used, and novel representations are proposed to avoid the sparse supervision. It shows that to successfully train a NeRF, either we can add supervision to the system or we can use a more efficient way to model the problem, just like NeRF to light field.
+
+In Table \ref{tab:relation}, the relationship and comparison of NeRF variants are summarized. Notice that although all the works claim that they achieve the SotA in this field, they still slightly differ in performance, which is evaluated by PSNR.
+
+\begin{table}[t]
    \centering
-   \begin{tabular}{@{}lc@{}}
+   \begin{tabular}{@{}lc@{}c@{}lc@{}lc@{}lc}
      \hline
-     Method & Frobnability \\
+     Method && Taxonomy && Single View && PSNR$\uparrow$\\
      \hline
-     Theirs & Frumpy \\
-     Yours & Frobbly \\
-     Ours & Makes one's heart Frob\\
+     NeRF~\cite{mildenhall2020nerf} && / && $\times$ && 11\\
+     DS-NeRF~\cite{kangle2021dsnerf} && DG && $\times$ && \\
+     DDP-NeRF~\cite{Roessle_2022_CVPR} && DG && $\times$ && \\
+     SRF~\cite{SRF} && CG && $\times$ &&\\
+     pixelNeRF~\cite{yu2020pixelnerf} && CG && $\checkmark$ &&\\
+     MVSNeRF~\cite{mvsnerf} && CG && $\times$ &&\\
+     VisionNeRF~\cite{lin2023visionnerf} && NR && $\checkmark$ &&\\
+     NeRS~\cite{zhang2021ners} && NR && $\times$ &&\\
+     AutoRF~\cite{mueller2022autorf} && NR && $\checkmark$ &&\\
+     SinNeRF~\cite{Xu_2022_SinNeRF} && O && $\checkmark$ &&\\
+     DietNeRF~\cite{Jain_2021_ICCV} && O && $\times$ &&\\
+     RegNeRF~\cite{Niemeyer2021Regnerf} && O && $\times$ &&\\
      \hline
    \end{tabular}
    \vspace{2mm}
-   \caption{Results.   Ours is better.}
+   \caption{Comparison of NeRF Variants. DG refers to depth guided, CC refers to correspondence guided, NR refers to novel representation, O refers to others, PSNR is tested on DTU dataset~\cite{6909453}.}
    \label{tab:relation}
    \vspace{-2mm}
 \end{table}
 
 \section{Future Development}
+
+As we can see from the above, NeRF variants are still in the early stage of development. There are still many problems to be solved, such as how to inject language annotations to them, how to make the training process as fast as possible, and so on. Maybe in the future, we can see more and more NeRF variants that can be used in real life.
 
 \newpage
 {\small
