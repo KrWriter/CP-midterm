@@ -97,14 +97,14 @@ Both of the two works facilitate novel view synthesis results at significantly h
 
 \subsection{Leveraging Correspondences between 2D and 3D}
 
-Since we know NeRF is the neural bridge between 2D and 3D, then it is natural to use the correspondences between 2D and 3D to help the reconstruction.
+Since we know NeRF is the “neural” bridge between 2D and 3D, then it is natural to use the correspondences between 2D and 3D to help the reconstruction.
 
 In SRF~\cite{SRF}, researchers predict color and density for each 3D point given an encoding of its stereo correspondence in the input images. The encoding is implicitly learned by an ensemble of pair-wise similarities — emulating classical stereo. Experiments show that SRF learns structure instead of over-fitting on a scene.
 
 In~\cite{yu2020pixelnerf}, researchers proposed pixelNeRF, a learning framework that enables predicting NeRFs from one or several images in a feed-forward manner. Unlike the original NeRF network, which does not make use of any image features, pixelNeRF takes spatial image features aligned to each pixel as an input. This image conditioning allows the framework to be trained on a set of multi-view images, where it can learn scene priors to perform view synthesis from one or few input views.
 
 And in MVSNeRF~\cite{mvsnerf}, researchers leverages plane-swept cost volumes (widely used in multi-view stereo) for geometry-aware scene reasoning, and combines this with physically based volume rendering for neural radiance field reconstruction.
-They first constructs a cost volume by warping 2D image features onto a plane sweep, then apply 3D CNN to reconstruct a neural encoding volume with per-voxel neural features, which they use to interpolate features to regress volume density and RGB radiance by an MLP.
+They first construct a cost volume by warping 2D image features onto a plane sweep, then apply 3D CNN to reconstruct a neural encoding volume with per-voxel neural features, which they use to interpolate features to regress volume density and RGB radiance by an MLP.
 
 \subsection{Applying Novel Representations}
 
@@ -113,13 +113,13 @@ NeRF~\cite{mildenhall2020nerf} proposed a neural representation of 3D scenes, bu
 In VisionNeRF~\cite{lin2023visionnerf}, researchers from UC San Diego and MIT propose to leverage both the global and local features to form an expressive 3D representation. The global features are learned from a vision transformer, while the local features are extracted from a 2D convolutional network. 
 Therefore, this novel 3D representation allows the network to reconstruct unseen regions without enforcing constraints like symmetry or canonical coordinate systems.
 
-While NeRS~\cite{zhang2021ners} learns a neural shape representation of a closed surface that is diffeomorphic to a sphere, guaranteeing water-tight reconstructions. Even more importantly, surface parameterizations allow NeRS to learn (neural) bidirectional surface reflectance functions (BRDFs) that factorize view-dependent appearance into environmental illumination, diffuse color (albedo), and specular “shininess.”
+While NeRS~\cite{zhang2021ners} learns a neural shape representation of a closed surface that is diffeomorphic to a sphere, guaranteeing water-tight reconstructions. Moreover, surface parameterizations allow NeRS to learn (neural) bidirectional surface reflectance functions (BRDFs) that factorize view-dependent appearance into environmental illumination, diffuse color (albedo), and specular “shininess.”
 
 And in \cite{mueller2022autorf}, AutoRF is proposed to learn a normalized, object-centric representation whose embedding describes and disentangles shape, appearance, and pose. Each encoding provides well-generalizable, compact information about the object of interest, which is decoded in a single-shot into a new target view, thus enabling novel view synthesis.
 
 \subsection{Others}
 
-Of course, apart from the above perspectives, there are methods that make use of other elaborated ideas to achieve sparse-view reconstruction.
+Of course, apart from the above perspectives, there are methods that make use of other elaborate ideas to achieve sparse-view reconstruction.
 
 The core idea of learning scene representation from sparse input is the idea of semi-supervised learning, where psuedo labels play an important role. 
 In \cite{Xu_2022_SinNeRF}, researchers present a Single View NeRF (SinNeRF) framework consisting of thoughtfully designed semantic and geometry regularizations.
@@ -137,7 +137,7 @@ Also, some of them (\cite{yu2020pixelnerf}, \cite{lin2023visionnerf}, \cite{muel
 
 From above, we can see that the tricky issue mainly lies in how to effectively supervise the reconstruction since views are sparse. In the works above, depth, correspondence, psuedo labels are used, and novel representations are proposed to avoid the sparse supervision. It shows that to successfully train a NeRF, either we can add supervision to the system or we can use a more efficient way to model the problem, just like NeRF to light field.
 
-In Table \ref{tab:relation}, the relationship and comparison of NeRF variants are summarized. Notice that although all the works claim that they achieve the SotA in this field, they still slightly differ in performance, which is evaluated by PSNR.
+In Table \ref{tab:relation}, the comparison between NeRF variants are summarized. Notice that although all the works claim that they achieve the SotA in this field, they still slightly differ in performance, which is evaluated by PSNR.
 
 \begin{table}[t]
    \centering
