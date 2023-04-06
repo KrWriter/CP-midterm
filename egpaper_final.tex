@@ -101,16 +101,16 @@ Since we know NeRF is the “neural” bridge between 2D and 3D, then it is natu
 
 In SRF~\cite{SRF}, researchers predict color and density for each 3D point given an encoding of its stereo correspondence in the input images. The encoding is implicitly learned by an ensemble of pair-wise similarities — emulating classical stereo. Experiments show that SRF learns structure instead of over-fitting on a scene.
 
-In~\cite{yu2020pixelnerf}, researchers proposed pixelNeRF, a learning framework that enables predicting NeRFs from one or several images in a feed-forward manner. Unlike the original NeRF network, which does not make use of any image features, pixelNeRF takes spatial image features aligned to each pixel as an input. This image conditioning allows the framework to be trained on a set of multi-view images, where it can learn scene priors to perform view synthesis from one or few input views.
+In~\cite{yu2020pixelnerf}, researchers propose pixelNeRF, a learning framework that enables predicting NeRFs from one or several images in a feed-forward manner. Unlike the original NeRF network, which does not make use of any image features, pixelNeRF takes spatial image features aligned to each pixel as an input. This image conditioning allows the framework to be trained on a set of multi-view images, where it can learn scene priors to perform view synthesis from one or few input views.
 
-And in MVSNeRF~\cite{mvsnerf}, researchers leverages plane-swept cost volumes (widely used in multi-view stereo) for geometry-aware scene reasoning, and combines this with physically based volume rendering for neural radiance field reconstruction.
+And in MVSNeRF~\cite{mvsnerf}, researchers leverage plane-swept cost volumes (widely used in multi-view stereo) for geometry-aware scene reasoning, and combines this with physically based volume rendering for neural radiance field reconstruction.
 They first construct a cost volume by warping 2D image features onto a plane sweep, then apply 3D CNN to reconstruct a neural encoding volume with per-voxel neural features, which they use to interpolate features to regress volume density and RGB radiance by an MLP.
 
 \subsection{Applying Novel Representations}
 
 NeRF~\cite{mildenhall2020nerf} proposed a neural representation of 3D scenes, but it also has a few drawbacks, like lacking the ability to capture the global structure of the scene. A few works addressed these drawbacks by applying novel representations which are inspired by the original architecture of NeRF.
 
-In VisionNeRF~\cite{lin2023visionnerf}, researchers from UC San Diego and MIT propose to leverage both the global and local features to form an expressive 3D representation. The global features are learned from a vision transformer, while the local features are extracted from a 2D convolutional network. 
+In VisionNeRF~\cite{lin2023visionnerf}, researchers propose to leverage both the global and local features to form an expressive 3D representation. The global features are learned from a Vision Transformer~\cite{dosovitskiy2021image}, while the local features are extracted from a 2D convolutional network. 
 Therefore, this novel 3D representation allows the network to reconstruct unseen regions without enforcing constraints like symmetry or canonical coordinate systems.
 
 While NeRS~\cite{zhang2021ners} learns a neural shape representation of a closed surface that is diffeomorphic to a sphere, guaranteeing water-tight reconstructions. Moreover, surface parameterizations allow NeRS to learn (neural) bidirectional surface reflectance functions (BRDFs) that factorize view-dependent appearance into environmental illumination, diffuse color (albedo), and specular “shininess”.
