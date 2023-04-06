@@ -86,14 +86,14 @@ For each perspective, a few works will be mentioned and their contributions will
 
 \subsection{Using Depth to Guide Reconstruction}
 
-It is very common to use depth information to guide 3D reconstruction, since in multi-view stereo, coarse 3D information can be easily obtained by Structure from Motion (SfM).
+It is very common to use depth information to guide 3D reconstruction, since in multi-view stereo, coarse 3D information can be easily obtained by Structure from Motion (SfM)~\cite{ozyesil2017survey}.
 
 In DS-NeRF~\cite{kangle2021dsnerf}, researchers use SfM to produce sparse 3D points that can be used as “free” depth supervision during training
 and add a loss to encourage the distribution of a ray’s terminating depth matches a given 3D keypoint, incorporating depth uncertainty.
 
 While in DDP-NeRF~\cite{Roessle_2022_CVPR}, researchers first utilize the sparse point cloud reconstructions from SfM preprocessing, which to feed into a depth completion network. They then impose these depth estimates as constraints to the NeRF optimization according to the estimated uncertainty.
 
-Both of the two works facilitate novel view synthesis results at significantly higher image quality and lower depth error compared to NeRF, and more importantly, they both use depth information to help constraint NeRF and achieve sparse-view reconstruction.
+Both of the works facilitate novel view synthesis results at significantly higher image quality and lower depth error compared to NeRF, and more importantly, they both use depth information to help constraint NeRF and achieve sparse-view reconstruction.
 
 \subsection{Leveraging Correspondences between 2D and 3D}
 
@@ -108,7 +108,7 @@ They first construct a cost volume by warping 2D image features onto a plane swe
 
 \subsection{Applying Novel Representations}
 
-NeRF~\cite{mildenhall2020nerf} proposed a neural representation of 3D scenes, but it also has a few drawbacks, like lacking the ability to capture the global structure of the scene. A few works addressed these drawbacks by applying novel representations which are inspired by the original architecture of NeRF.
+NeRF~\cite{mildenhall2020nerf} proposed a neural representation of 3D scenes, but it also has a few drawbacks, such as unable to capture the global structure of the scene, etc. A few works addressed these drawbacks by applying novel representations which are inspired by the original architecture of NeRF.
 
 In VisionNeRF~\cite{lin2023visionnerf}, researchers propose to leverage both the global and local features to form an expressive 3D representation. The global features are learned from a Vision Transformer~\cite{dosovitskiy2021image}, while the local features are extracted from a 2D convolutional network. 
 Therefore, this novel 3D representation allows the network to reconstruct unseen regions without enforcing constraints like symmetry or canonical coordinate systems.
