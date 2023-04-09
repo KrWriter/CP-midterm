@@ -1,4 +1,5 @@
 *.pdf
+!egpaper_final.pdf
 *.aux
 *.log
 *.synctex.gz
